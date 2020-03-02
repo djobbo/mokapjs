@@ -1,0 +1,17 @@
+Hobby {
+    name: String(minLength: 6, maxLength: 16)/[a-z]/g
+    years: Number(min: 0, max: 50)
+}
+
+User {
+    id: String(length: 16)
+    name {
+        firstnames: [String(minLength: 3, maxLength: 12)/[a-z]/g](length: 3)
+        lastname: String(minLength: 8,maxLength: 20)/[A-Z]/g
+    }
+    birthdate: Date(start: 1900-0-1, end: 2020-0-1)
+    username: String(minLength: 8, maxLength: 24)/[a-z0-9]/g
+    points: Number(min: 0, max: 100)
+    hobbies: [Hobby](minLength: 0, maxLength: 3)
+    class: 'base'
+}
