@@ -1,5 +1,5 @@
 const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
 const randomNumber = (min, max) => Math.random() * (max - min) + min;
 
@@ -18,18 +18,18 @@ const randomArray = (length, fun) => new Array(length).fill().map(fun);
 const randomDate = (start, end) =>
 	new Date(
 		start.getTime() + Math.random() * (end.getTime() - start.getTime())
-    );
+	);
 
 const randomBoolean = _ => !!randomInt(0, 2);
 
 const randomValueFromArray = arr => arr[randomInt(0, arr.length)];
 
 module.exports = {
-    randomNumber,
-    randomInt,
-    randomString,
-    randomArray,
-    randomDate,
-    randomBoolean,
-    randomValueFromArray
-}
+	randomNumber,
+	randomInt,
+	randomString,
+	randomArray,
+	randomDate,
+	randomBoolean,
+	randomValueFromArray
+};
