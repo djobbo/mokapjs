@@ -4,7 +4,7 @@ const mockBranch = require('../util/mockBranch');
 
 function mockArray(branch) {
     if (Array.isArray(branch.value))
-        return branch.value;
+        return branch.value.map(x => mockBranch(x));
 
     return randomArray(
         (typeof branch.length).toString().includes('object')
