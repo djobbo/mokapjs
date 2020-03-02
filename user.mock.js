@@ -39,7 +39,7 @@ const User = {
 			value: { minLength: 8, maxLength: 24, regex: /[a-z0-9]/g }
 		},
 		points: { type: Number, value: { min: 0, max: 100 } },
-		hobbies: { type: Array, length: { min: 0, max: 3 }, value: Hobby }
+        hobbies: { type: Array, length: { min: 0, max: 3 }, value: Hobby }
 	}
 };
 

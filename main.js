@@ -1,64 +1,36 @@
 const playerSchema = require('./user.mock');
 
-const characters =
-	'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-const randomNumber = (min, max) => Math.random() * (max - min + 1) + min;
-const randomInt = (min, max) => Math.floor(randomNumber(min, max));
-const randomString = (length, regex) => {
-	const chars = regex ? characters.match(regex).join('') : characters;
-	return new Array(length)
-		.fill()
-		.map(c => chars[Math.floor(Math.random() * chars.length)])
-		.join('');
-};
-const randomArray = (length, fun) => new Array(length).fill().map(fun);
-const randomDate = (start, end) =>
-	new Date(
-		start.getTime() + Math.random() * (end.getTime() - start.getTime())
-	);
+const mockNumber = require('./branches/Number');
+const mockString = require('./branches/String');
+const mockArray = require('./branches/Array');
+const mockMap = require('./branches/Map');
+const mockDate = require('./branches/Date');
 
-const MockBranch = branch => {
-	if ((typeof branch).toString() !== 'object') return branch;
+const mockBranch = branch => {
+    if ((typeof branch).toString() !== 'object')
+        return branch;
 
-	if ((typeof branch.type).toString() !== 'function') return undefined;
+    if ((typeof branch.type).toString() !== 'function')
+        return undefined;
 
-	const branchType = branch.type.toString();
+    const branchType = branch.type.toString().split(' ')[1];
 
-	if (branchType.includes('Number'))
-		return (typeof branch.value).toString().includes('object')
-			? randomInt(branch.value.min, branch.value.max)
-			: branch.value;
-
-	if (branchType.includes('String'))
-		return randomString(
-			randomInt(
-				branch.value.minLength || branch.value.length || 3,
-				branch.value.maxLength || branch.value.length || 32
-			),
-			branch.value.regex || null
-		);
-
-	if (branchType.includes('Array'))
-		return randomArray(
-			(typeof branch.length).toString().includes('object')
-				? randomInt(branch.length.min, branch.length.max)
-				: branch.length,
-			() => MockBranch(branch.value)
-		);
-
-	if (branchType.includes('Map'))
-		return Object.entries(branch.value).reduce(
-			(acc, [key, value]) => ({ ...acc, [key]: MockBranch(value) }),
-			{}
-		);
-
-	if (branchType.includes('Date'))
-		return randomDate(branch.value.start, branch.value.end);
+    switch(branchType) {
+        case 'Number()':
+            return mockNumber(branch);
+        case 'String()':
+            return mockString(branch);
+        case 'Array()':
+            return mockArray(branch);
+        case 'Map()':
+            return mockMap(branch);
+        case 'Date()':
+            return mockDate(branch);
+        default:
+            break;
+    }
 
 	return {};
 };
 
-const MockTree = schema => MockBranch(schema);
-
-const mock = MockTree(playerSchema);
-console.log(mock);
+module.exports = schema => mockBranch(schema);
