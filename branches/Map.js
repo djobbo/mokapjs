@@ -1,11 +1,12 @@
-const { randomValueFromArray } = require('../util/generators');
+const { randomValueFromArray, randomString, randomInt } = require('../util/generators');
 
-function mockMap(branch) {
-    if (Array.isArray(branch.value))
-        return randomValueFromArray(branch.value);
-
-    return Object.entries(branch.value).reduce(
-        (acc, [key, value]) => ({ ...acc, [key]: mockBranch(value) }),
+function mockMap(value) {
+    if (Array.isArray(value))
+        return () => randomValueFromArray(value);
+    
+    return () => Object.entries(value).reduce(
+        (acc, [key, val]) => 
+            ({ ...acc, [key]: ((typeof val).toString() === 'function' ? val() : val) }),
         {}
     );
 }

@@ -1,10 +1,10 @@
 const { randomValueFromArray, randomDate } = require('../util/generators');
 
-function mockDate(branch) {
-    if (Array.isArray(branch.value))
-        return randomValueFromArray(branch.value);
+function mockDate(value) {
+    if (Array.isArray(value))
+        return () => randomValueFromArray(value);
 
-	return randomDate(branch.value.start, branch.value.end);
+	return () => randomDate(value.start, value.end);
 }
 
 module.exports = mockDate;

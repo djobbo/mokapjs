@@ -1,16 +1,14 @@
 const { randomArray, randomInt } = require('../util/generators');
 
-const mockBranch = require('../util/mockBranch');
+function mockArray(value, length = 0) {
+    if (Array.isArray(value))
+        return () => value.map(x => (typeof x).toString() === 'function' ? x() : x);
 
-function mockArray(branch) {
-    if (Array.isArray(branch.value))
-        return branch.value.map(x => mockBranch(x));
-
-    return randomArray(
-        (typeof branch.length).toString().includes('object')
-            ? randomInt(branch.length.min, branch.length.max)
-            : branch.length,
-        () => mockBranch(branch.value)
+    return () => randomArray(
+        (typeof length).toString().includes('object')
+            ? randomInt(length.min, length.max)
+            : length,
+        value
     );
 }
 

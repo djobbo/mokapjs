@@ -1,14 +1,27 @@
-const mock = require('./main');
+const { arr, bool, date, map, num, str } = require('./main');
 
-console.log(mock({
-    type: Array,
-    length: 3,
-    value: [{
-        type: Array,
-        length: 3,
-        value: {
-            type: String,
-            value: ['ABC', 'DEF', 'AZERTY', 'QWERTY']
+const User =
+    arr([
+        arr(bool(), 2),
+        num({ min: 1, max: 12 }),
+        date(
+            {
+                start: new Date(1999, 11, 3),
+                end: new Date()
+            }
+        ),
+        arr(num({ min: -10, max: 10 }), 3),
+        arr(str(['a', 'b', 'c']), 3),
+        arr(str({length: 10, filter: /[A-Z]/g}), 2),
+        {
+            test: num()
         }
-    }, {type: Number, value: [1, 4, 8]}]
-}))
+    ]);
+
+const mapTest = map({
+    user: User,
+    hello: str(['hi', 'hello', 'sup'])
+})
+
+console.log(mapTest);
+console.log(mapTest())

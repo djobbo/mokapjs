@@ -1,14 +1,18 @@
 const { randomValueFromArray, randomString, randomInt } = require('../util/generators');
 
-function mockString(branch) {
-    if (Array.isArray(branch.value))
-        return randomValueFromArray(branch.value);
-    return randomString(
+function mockString(value) {
+    if ((typeof value).toString() === "string")
+        return value;
+
+    if (Array.isArray(value))
+        return () => randomValueFromArray(value);
+    
+    return () => randomString(
         randomInt(
-            branch.value.minLength || branch.value.length || 3,
-            branch.value.maxLength || branch.value.length || 32
+            value.minLength || value.length || 3,
+            value.maxLength || value.length || 32
         ),
-        branch.value.regex || null
+        value.filter || null
     );
 }
 

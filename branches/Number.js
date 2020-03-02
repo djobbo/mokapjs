@@ -1,12 +1,15 @@
 const { randomValueFromArray, randomInt } = require('../util/generators');
 
-function mockNumber(branch) {
-    if (Array.isArray(branch.value))
-        return randomValueFromArray(branch.value);
+function mockNumber(value) {
+    if ((typeof value).toString() === "number")
+        return value;
+        
+    if (Array.isArray(value))
+        return () => randomValueFromArray(value);
 
-    return (typeof branch.value).toString().includes('object')
-        ? randomInt(branch.value.min, branch.value.max)
-        : branch.value;
+    return () => (typeof value).toString().includes('object')
+        ? randomInt(value.min, value.max)
+        : value;
 }
 
 module.exports = mockNumber;

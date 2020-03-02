@@ -1,7 +1,7 @@
 const { randomBoolean } = require('../util/generators');
 
-function mockArray(branch) {
-    return randomBoolean()
+function mockBoolean() {
+    return randomBoolean;
 }
 
-module.exports = mockArray;
+module.exports = mockBoolean;
