@@ -23,5 +23,4 @@ const mapTest = map({
     hello: str(['hi', 'hello', 'sup'])
 })
 
-console.log(mapTest);
-console.log(mapTest())
+console.log(mapTest());
