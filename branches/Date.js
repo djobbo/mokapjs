@@ -1,3 +1,5 @@
+const { randomValueFromArray, randomDate } = require('../util/generators');
+
 function mockDate(branch) {
     if (Array.isArray(branch.value))
         return randomValueFromArray(branch.value);

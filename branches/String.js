@@ -1,3 +1,5 @@
+const { randomValueFromArray, randomString, randomInt } = require('../util/generators');
+
 function mockString(branch) {
     if (Array.isArray(branch.value))
         return randomValueFromArray(branch.value);
