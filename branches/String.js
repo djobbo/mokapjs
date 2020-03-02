@@ -17,7 +17,7 @@ function mockString(value) {
 			: randomString(
 					randomInt(
 						value.minLength || value.length || 3,
-						value.maxLength || value.length || 32
+						(value.maxLength || value.length || 32) + 1
 					),
 					value.filter || null
 			  );
