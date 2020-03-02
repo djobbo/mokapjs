@@ -1,11 +1,11 @@
 const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-module.exports.randomNumber = (min, max) => Math.random() * (max - min) + min;
+const randomNumber = (min, max) => Math.random() * (max - min) + min;
 
-module.exports.randomInt = (min, max) => Math.floor(randomNumber(min, max));
+const randomInt = (min, max) => Math.floor(randomNumber(min, max));
 
-module.exports.randomString = (length, regex) => {
+const randomString = (length, regex) => {
 	const chars = regex ? characters.match(regex).join('') : characters;
 	return new Array(length)
 		.fill()
@@ -13,11 +13,23 @@ module.exports.randomString = (length, regex) => {
 		.join('');
 };
 
-module.exports.randomArray = (length, fun) => new Array(length).fill().map(fun);
+const randomArray = (length, fun) => new Array(length).fill().map(fun);
 
-module.exports.randomDate = (start, end) =>
+const randomDate = (start, end) =>
 	new Date(
 		start.getTime() + Math.random() * (end.getTime() - start.getTime())
     );
 
-module.exports.randomValueFromArray = arr => arr[randomInt(0, arr.length)];
+const randomBoolean = _ => !!randomInt(0, 2);
+
+const randomValueFromArray = arr => arr[randomInt(0, arr.length)];
+
+module.exports = {
+    randomNumber,
+    randomInt,
+    randomString,
+    randomArray,
+    randomDate,
+    randomBoolean,
+    randomValueFromArray
+}

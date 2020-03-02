@@ -1,4 +1,6 @@
-const { randomInt } = require('../util/generators');
+const { randomArray, randomInt } = require('../util/generators');
+
+const mockBranch = require('../util/mockBranch');
 
 function mockArray(branch) {
     if (Array.isArray(branch.value))
