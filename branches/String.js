@@ -1,3 +1,5 @@
+const RandExp = require('randexp');
+
 const {
 	randomValueFromArray,
 	randomString,
@@ -10,13 +12,15 @@ function mockString(value) {
 	if (Array.isArray(value)) return () => randomValueFromArray(value);
 
 	return () =>
-		randomString(
-			randomInt(
-				value.minLength || value.length || 3,
-				value.maxLength || value.length || 32
-			),
-			value.filter || null
-		);
+		value instanceof RegExp
+			? new RandExp(value).gen()
+			: randomString(
+					randomInt(
+						value.minLength || value.length || 3,
+						value.maxLength || value.length || 32
+					),
+					value.filter || null
+			  );
 }
 
 module.exports = mockString;
