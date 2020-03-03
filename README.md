@@ -27,13 +27,13 @@ $ yarn add mokapjs
 Import only what you need
 
 ```js
-const { arr, bool, str } = require('mokap');
+const { arr, bool, str } = require('mokapjs');
 ```
 
-Or import everything into a namespace (here, `mokap`)
+Or import everything into a namespace (here, `mokapjs`)
 
 ```js
-const mokap = require('mokap');
+const mokap = require('mokapjs');
 ```
 
 #### First steps
@@ -47,7 +47,7 @@ A generator is a function which, when called, will return a mock-up value of a p
 Example
 
 ```js
-const { str } = require('mokap');
+const { str } = require('mokapjs');
 
 // Creating a generator
 const hello = str('world');
@@ -62,7 +62,7 @@ console.log(hello()); // output: world
 #### Boolean
 
 ```js
-const { bool } = require('mokap');
+const { bool } = require('mokapjs');
 ```
 
 Creating a Boolean Generator
@@ -76,7 +76,7 @@ console.log(boolGenerator()); // output: true | false
 #### String
 
 ```js
-const { str } = require('mokap');
+const { str } = require('mokapjs');
 ```
 
 Creating a String Generator
@@ -151,7 +151,7 @@ console.log(strGenerator());
 > A map corresponds to a javascript object.
 
 ```js
-const { map } = require('mokap');
+const { map } = require('mokapjs');
 ```
 
 Creating a Map Generator

@@ -1,10 +1,10 @@
 {
-	"name": "mockapi",
-	"version": "1.0.0",
+	"name": "mokapjs",
+	"version": "0.0.1",
 	"description": "",
 	"main": "main.js",
 	"scripts": {
-		"dev": "nodemon ."
+		"dev": "nodemon test"
 	},
 	"keywords": [],
 	"author": "",
