@@ -30,7 +30,7 @@ Import only what you need
 const { arr, bool, str } = require('mokapjs');
 ```
 
-Or import everything into a namespace (here, `mokapjs`)
+Or import everything into a namespace (here, `mokap`)
 
 ```js
 const mokap = require('mokapjs');
@@ -38,13 +38,13 @@ const mokap = require('mokapjs');
 
 #### First steps
 
-Modeling data with mokap is
+Modeling data with mokap is pretty straight forward. Data structures follow a JSON like format for ease of use.
 
 ## Generators
 
 A generator is a function which, when called, will return a mock-up value of a predefined type.
 
-Example
+> Example of a string generator
 
 ```js
 const { str } = require('mokapjs');
@@ -52,55 +52,50 @@ const { str } = require('mokapjs');
 // Creating a generator
 const hello = str('world');
 
-console.log(hello); // output: [Function]
+console.log(hello);
+// output: [Function]
 
-console.log(hello()); // output: world
+console.log(hello());
+// output: world
 ```
 
 ### Basic Generators
 
 #### Boolean
 
+> Simple Boolean Generator
+
 ```js
 const { bool } = require('mokapjs');
-```
+const boolGen = bool();
 
-Creating a Boolean Generator
-
-```js
-const boolGenerator = bool();
-
-console.log(boolGenerator()); // output: true | false
+console.log(boolGen());
+// output: true | false
 ```
 
 #### String
 
+> Simple String Generator
+
 ```js
 const { str } = require('mokapjs');
-```
+const strGen = str('text');
 
-Creating a String Generator
-
-```js
-const strGenerator = str('text');
-
-console.log(strGenerator());
+console.log(strGen());
 // output: text
 ```
 
-This is great, but there are more interesting ways to mock-up string values.
-
-1. Random generation with **fixed-length**
+> Random generation with **fixed-length**
 
 ```js
 // Generator will output a random string of length 12 when called.
-const strGenerator = str({ length: 12 });
+const fixedLengthGen = str({ length: 12 });
 
-console.log(strGenerator());
+console.log(fixedLengthGen());
 // output: Ze1DJsi86asP | 6l237qUKx5ze etc...
 ```
 
-1. Random string generation with **variable-length**
+> Random string generation with **variable-length**
 
 ```js
 // Generator will output a random string of length 3 to 10 when called.
@@ -110,7 +105,7 @@ console.log(strGenerator());
 // output: Ze1DJs | 6l237qUKx etc...
 ```
 
-2. Random string generation with fixed or variable length & **filter**
+> Random string generation with fixed or variable length & **filter**
 
 ```js
 console.log(str({ length: 12, filter: /[A-Z]/ })());
@@ -120,16 +115,16 @@ console.log(str({ length: { min: 3, max: 10 }, filter: /[a-z0-9]/ })());
 // output: q25d | 4g25e8dsz etc...
 ```
 
-3. Random string generation using a **Regular Expression**
+> Random string generation using a **Regular Expression**
 
 ```js
-const strGenerator = str(/[a-z]{3, 6}@(gmail|outlook).com/);
+const strGenerator = str(/[a-z]{3, 6}@[a-z]mail.com/);
 
 console.log(strGenerator());
-// output: fmox@outlook.com | rxb@gmail.com | pnyae@gmail.com etc...
+// output: fmox@imail.com | rxb@dmail.com | pnyae@gmail.com etc...
 ```
 
-4. Random string element from an array
+> Random string element from an array
 
 ```js
 const strGenerator = str(['hello', 'hi', 'world']);
@@ -179,3 +174,5 @@ const mapGenerator = map({
 ```
 
 #### Array
+
+### Custom Generators
